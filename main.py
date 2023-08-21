@@ -8,7 +8,7 @@ client = Client(account_sid, auth_token)
 
 location = {'lat': 47.790939,
             'lon': -122.335159,
-            'appid': '1dab1178200640c9244b4c5e2cdd8606',
+            'appid': os.environ.get('API_KEY'),
             'exclude': 'current,minutely,daily'
             }
 
