@@ -1,14 +1,18 @@
 import requests
 import os
 from twilio.rest import Client
+from twilio.http.http_client import TwilioHttpClient
+
+proxy_client = TwilioHttpClient()
+proxy_client.session.proxies = {'https': os.environ['https_proxy']}
 
 account_sid = os.environ.get('ACCOUNT_SID')
 auth_token = os.environ.get('AUTH_TOKEN')
-client = Client(account_sid, auth_token)
+client = Client(account_sid, auth_token, http_client=proxy_client)
 
-location = {'lat': 47.790939,
-            'lon': -122.335159,
-            'appid': os.environ.get('API_KEY'),
+location = {'lat': 47.606209,
+            'lon': -122.332069,
+            'appid': os.environ.get("API_KEY"),
             'exclude': 'current,minutely,daily'
             }
 
