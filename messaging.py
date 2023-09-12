@@ -3,17 +3,13 @@ from constants import ACCOUNT_SID, AUTH_TOKEN, MY_EMAIL, MY_PASSWORD
 from weather_data import WeatherData
 from google_sheet import GoogleSheet
 import smtplib
-import os
-from twilio.http.http_client import TwilioHttpClient
 
 
 class Messaging:
     def __init__(self, weather_report: WeatherData, recipient: GoogleSheet):
-        self.proxy_client = TwilioHttpClient()
-        self.proxy_client.session.proxies = {'https': os.environ['https_proxy']}
         self.account_sid = ACCOUNT_SID
         self.auth_token = AUTH_TOKEN
-        self.client = Client(self.account_sid, self.auth_token, http_client=self.proxy_client)
+        self.client = Client(self.account_sid, self.auth_token)
         self.user_list = recipient.get_user_data()
         self.weather_report = weather_report
         self.email_dict = {}
@@ -50,5 +46,3 @@ class Messaging:
                 server.sendmail(from_addr=MY_EMAIL,
                                 to_addrs=self.email_dict[name],
                                 msg=email_message)
-
-
