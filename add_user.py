@@ -1,14 +1,19 @@
 import requests
 from constants import SHEETY_ENDPOINT, HEADER
 
+# Variable to control the loop
 turn_on = True
 
 while turn_on:
+    # Prompt the user for username and contact method
     name = input('Enter username for new user: ')
     contact = input('Enter contact method for new user: ')
 
+    # Set the endpoint and header for the Sheety API
     sheety_endpoint = SHEETY_ENDPOINT
     header = {'Authorization': HEADER}
+
+    # Create a dictionary with user data
     sheety_params = {
         "sheet1": {
             'user': name,
@@ -16,8 +21,11 @@ while turn_on:
         }
     }
     try:
+        # Send a POST request to add user data to the Google Sheet
         request = requests.post(url=sheety_endpoint, json=sheety_params, headers=header)
         request.raise_for_status()
+
+        # Check the response status code
         if request.status_code == 200:
             print("Data successfully posted to Google Sheet.\n")
         else:
@@ -45,6 +53,7 @@ while turn_on:
         print(f"An unexpected error occurred: {e}")
         break
     else:
+        # Ask the user if they want to continue
         check_system = input('Do you want to continue? : ')
         if check_system.lower() == 'yes' or check_system.lower() == 'y':
             continue
