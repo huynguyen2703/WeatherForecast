@@ -34,7 +34,6 @@ class WeatherData:
             str: A formatted weather forecast report.
         """
         weather_summary = {self.hour_list[item]: self.get_weather()[item] for item in range(len(self.hour_list))}
-        pprint(weather_summary)
 
         final_report = f"Weather Forecast for {self.today} \n"
 
