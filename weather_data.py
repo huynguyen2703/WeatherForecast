@@ -1,7 +1,6 @@
 import requests
 from datetime import datetime
 from constants import WEATHER_URL, LOCATION, HOUR_LIST
-from pprint import pprint
 
 
 class WeatherData:
@@ -39,12 +38,13 @@ class WeatherData:
 
         for hour, weather_description in weather_summary.items():
             # Determine weather icon based on descriptions
-            if (weather_description[1] == 'clear sky' and int(hour.strip(":")[0]) < 19) or weather_description[1]\
+            if (weather_description[1] == 'clear sky' and int(hour.strip(":")[0]) < 19) or weather_description[1] \
                     == 'few clouds':
                 icon = '🌞️'
+                if weather_description[1] == 'clear sky' and int(hour.strip(":")[0]) > 19:
+                    icon = '🌚'
             # Add more conditions for different weather types
-            elif weather_description[1] == 'clear sky' and int(hour.strip(":")[0]) > 19:
-                icon = '🌚'
+
             elif 'thunderstorm' in weather_description[1]:
                 icon = '⛈️'
             elif 'drizzle' in weather_description[1] or 'rain' in weather_description[1] or weather_description[1] \
