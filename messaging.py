@@ -3,8 +3,6 @@ from constants import ACCOUNT_SID, AUTH_TOKEN, MY_EMAIL, MY_PASSWORD
 from weather_data import WeatherData
 from google_sheet import GoogleSheet
 import smtplib
-import os
-from twilio.http.http_client import TwilioHttpClient
 
 
 class Messaging:
@@ -12,7 +10,6 @@ class Messaging:
     A class for sending weather notifications via SMS and email to users.
 
     Attributes:
-        proxy_client (TwilioHttpClient): HTTP client for proxy settings.
         account_sid (str): Twilio Account SID for sending SMS.
         auth_token (str): Twilio Auth Token for authentication.
         client (Client): Twilio client for sending SMS.
@@ -35,11 +32,9 @@ class Messaging:
             weather_report (WeatherData): An instance of WeatherData to provide weather information.
             recipient (GoogleSheet): An instance of GoogleSheet to fetch user data.
         """
-        self.proxy_client = TwilioHttpClient()
-        self.proxy_client.session.proxies = {'https': os.environ['https_proxy']}
         self.account_sid = ACCOUNT_SID
         self.auth_token = AUTH_TOKEN
-        self.client = Client(self.account_sid, self.auth_token, http_client=self.proxy_client)
+        self.client = Client(self.account_sid, self.auth_token)
         self.user_list = recipient.get_user_data()
         self.weather_report = weather_report
         self.email_dict = {}
