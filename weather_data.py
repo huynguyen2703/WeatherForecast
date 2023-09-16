@@ -2,6 +2,8 @@ import requests
 from datetime import datetime
 from constants import WEATHER_URL, LOCATION, HOUR_LIST
 
+icon = ''
+
 
 class WeatherData:
     def __init__(self):
@@ -32,6 +34,7 @@ class WeatherData:
         Returns:
             str: A formatted weather forecast report.
         """
+        global icon
         weather_summary = {self.hour_list[item]: self.get_weather()[item] for item in range(len(self.hour_list))}
 
         final_report = f"Weather Forecast for {self.today} \n"
@@ -41,8 +44,8 @@ class WeatherData:
             if (weather_description[1] == 'clear sky' and int(hour.strip(":")[0]) < 19) or weather_description[1] \
                     == 'few clouds':
                 icon = '🌞️'
-                if weather_description[1] == 'clear sky' and int(hour.strip(":")[0]) > 19:
-                    icon = '🌚'
+            elif weather_description[1] == 'clear sky' and int(hour.strip(":")[0]) > 19:
+                icon = '🌚'
             # Add more conditions for different weather types
 
             elif 'thunderstorm' in weather_description[1]:
