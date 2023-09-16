@@ -63,5 +63,4 @@ class WeatherData:
                 icon = '😷'
 
             final_report += f"{hour} : {icon}{weather_description[1]}\n"
-        final_report = final_report
         return final_report
