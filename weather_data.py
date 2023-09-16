@@ -41,12 +41,12 @@ class WeatherData:
 
         for hour, weather_description in weather_summary.items():
             # Determine weather icon based on descriptions
-            if (weather_description[1] == 'clear sky' and int(hour.strip(":")[0]) < 19) or weather_description[1] \
-                    == 'few clouds':
-                icon = '🌞️'
-            elif weather_description[1] == 'clear sky' and int(hour.strip(":")[0]) > 19:
-                icon = '🌚'
-            # Add more conditions for different weather types
+            if weather_description[1] == 'clear sky' or weather_description[1] == 'few clouds':
+                if int(hour.split(':')[0]) < 19:
+                    icon = '☀'
+                else:
+                    icon = '🌜'
+                    # Add more conditions for different weather types
 
             elif 'thunderstorm' in weather_description[1]:
                 icon = '⛈️'
@@ -63,4 +63,5 @@ class WeatherData:
                 icon = '😷'
 
             final_report += f"{hour} : {icon}{weather_description[1]}\n"
+        final_report = final_report
         return final_report
