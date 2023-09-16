@@ -56,7 +56,10 @@ class WeatherData:
             elif 'snow' in weather_description[1] or 'sleet' in weather_description[1]:
                 icon = '⛄️'
             elif weather_description[1] == 'scattered clouds':
-                icon = '🌤️'
+                if int(hour.split(':')[0]) < 19:
+                    icon = '🌤️'
+                elif int(hour.split(':')[0]) > 19:
+                    icon = '🌜☁️'
             elif weather_description[1] == 'broken clouds':
                 icon = '☁️'
             else:
