@@ -45,7 +45,7 @@ class WeatherData:
                 if int(hour.split(':')[0]) < 19:
                     icon = '☀'
                 else:
-                    icon = '🌜'
+                    icon = '🌙'
                     # Add more conditions for different weather types
 
             elif 'thunderstorm' in weather_description[1]:
@@ -58,8 +58,8 @@ class WeatherData:
             elif weather_description[1] == 'scattered clouds':
                 if int(hour.split(':')[0]) < 19:
                     icon = '🌤️'
-                elif int(hour.split(':')[0]) > 19:
-                    icon = '🌜☁️'
+                elif int(hour.split(':')[0]) >= 19:
+                    icon = '🌙☁️'
             elif weather_description[1] == 'broken clouds':
                 icon = '☁️'
             else:
