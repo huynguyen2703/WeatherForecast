@@ -6,23 +6,7 @@ import smtplib
 
 
 class Messaging:
-    """
-    A class for sending weather notifications via SMS and email to users.
 
-    Attributes:
-        account_sid (str): Twilio Account SID for sending SMS.
-        auth_token (str): Twilio Auth Token for authentication.
-        client (Client): Twilio client for sending SMS.
-        user_list (dict): User data obtained from Google Sheets.
-        weather_report (WeatherData): WeatherData object for weather information.
-        email_dict (dict): Dictionary to store email recipients.
-        sms_dict (dict): Dictionary to store SMS recipients.
-
-    Methods:
-        check_type(): Categorize users into email and SMS recipients.
-        send_sms_message(): Send weather notifications via SMS to users.
-        send_email_message(): Send weather notifications via email to users.
-    """
 
     def __init__(self, weather_report: WeatherData, recipient: GoogleSheet):
         """
