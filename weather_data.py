@@ -2,8 +2,6 @@ import requests
 from datetime import datetime
 from constants import WEATHER_URL, LOCATION, HOUR_LIST
 
-icon = ''
-
 
 class WeatherData:
     def __init__(self):
@@ -12,6 +10,7 @@ class WeatherData:
         self.location = LOCATION
         self.hour_list = HOUR_LIST
         self.today = datetime.today().strftime("%Y/%m/%d")
+        self.icon = ''
 
     def get_weather(self):
         """
@@ -34,36 +33,35 @@ class WeatherData:
         Returns:
             str: A formatted weather forecast report.
         """
-        global icon
         weather_summary = {self.hour_list[item]: self.get_weather()[item] for item in range(len(self.hour_list))}
 
-        final_report = f"Weather Forecast for {self.today} \n"
+        final_report = f"Weather Forecast for {self.today} \n\n"
 
         for hour, weather_description in weather_summary.items():
             # Determine weather icon based on descriptions
             if weather_description[1] == 'clear sky' or weather_description[1] == 'few clouds':
                 if int(hour.split(':')[0]) < 19:
-                    icon = '☀'
+                    self.icon = '☀'
                 else:
-                    icon = '🌙'
+                    self.icon = '🌙'
                     # Add more conditions for different weather types
 
             elif 'thunderstorm' in weather_description[1]:
-                icon = '⛈️'
+                self.icon = '⛈️'
             elif 'drizzle' in weather_description[1] or 'rain' in weather_description[1] or weather_description[1] \
                     == 'overcast clouds':
-                icon = '🌧️️'
+                self.icon = '🌧️️'
             elif 'snow' in weather_description[1] or 'sleet' in weather_description[1]:
-                icon = '⛄️'
+                self.icon = '⛄️'
             elif weather_description[1] == 'scattered clouds':
                 if int(hour.split(':')[0]) < 19:
-                    icon = '🌤️'
+                    self.icon = '🌤️'
                 elif int(hour.split(':')[0]) >= 19:
-                    icon = '🌙☁️'
+                    self.icon = '🌙☁️'
             elif weather_description[1] == 'broken clouds':
-                icon = '☁️'
+                self.icon = '☁️'
             else:
-                icon = '😷'
+                self.icon = '😷'
 
-            final_report += f"{hour} : {icon}{weather_description[1]}\n"
+            final_report += f"{hour} : {self.icon}{weather_description[1]}\n"
         return final_report
