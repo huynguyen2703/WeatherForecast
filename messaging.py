@@ -7,15 +7,7 @@ import smtplib
 
 class Messaging:
 
-
     def __init__(self, weather_report: WeatherData, recipient: GoogleSheet):
-        """
-        Initialize the Messaging class with required parameters.
-
-        Args:
-            weather_report (WeatherData): An instance of WeatherData to provide weather information.
-            recipient (GoogleSheet): An instance of GoogleSheet to fetch user data.
-        """
         self.account_sid = ACCOUNT_SID
         self.auth_token = AUTH_TOKEN
         self.client = Client(self.account_sid, self.auth_token)
