@@ -48,11 +48,15 @@ class Messaging:
 
                 subject = "Weather Forecast For Today"
                 email_message = f"Subject: {subject}\n\n"
-                email_message += f"Good Morning {name}😇 \n{self.weather_report.determine_weather()}"
+                email_message += f"Good Morning {name}😇 \n\n{self.weather_report.determine_weather()}"
 
                 # Encode the message as UTF-8
                 email_message = email_message.encode('utf-8')
 
-                server.sendmail(from_addr=MY_EMAIL,
-                                to_addrs=self.email_dict[name],
-                                msg=email_message)
+                try:
+                    server.sendmail(from_addr=MY_EMAIL,
+                                    to_addrs=self.email_dict[name],
+                                    msg=email_message)
+                    print("email sent successfully")
+                except smtplib.SMTPException as e:
+                    print(f"Error: {e} : failed to send email")
