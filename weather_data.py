@@ -22,7 +22,7 @@ class WeatherData:
         request = requests.get(url=self.url, params=self.location)
         request.raise_for_status()
         response = request.json()['hourly']
-        hourly_weather = response[:16]
+        hourly_weather = response[:18]
         weather_code_list = [(hour['weather'][0]['id'], hour['weather'][0]['description']) for hour in hourly_weather]
         return weather_code_list
 
