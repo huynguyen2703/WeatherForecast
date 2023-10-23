@@ -4,8 +4,23 @@ from constants import WEATHER_URL, LOCATION, HOUR_LIST
 
 
 class WeatherData:
+    """
+        A class for fetching weather data and generating weather reports.
+
+        Attributes:
+            url (str): The URL for the weather data API.
+            location (dict): The location data for weather information.
+            hour_list (list): A list of hours for weather forecasts.
+            today (str): The current date in 'YYYY/MM/DD' format.
+            icon (str): An emoji icon representing the weather.
+        """
     def __init__(self):
-        """Initialize WeatherData class with default parameters."""
+        """Initialize WeatherData class with default keyword arguments.
+           url : API endpoint to retrieve weather data
+           location : location of the area where weather conditions will be predicted
+           hour_list : list of hours in a day from 6am-23pm
+           today : today's date
+        """
         self.url = WEATHER_URL
         self.location = LOCATION
         self.hour_list = HOUR_LIST
@@ -14,8 +29,8 @@ class WeatherData:
 
     def get_weather(self):
         """
-        Fetch and return hourly weather data.
-
+        Fetch and return hourly weather data from OpenWeatherMap API.
+        Function uses list slicing to carefully form summary and weather condition ids into each element of a list.
         Returns:
             list: A list of tuples containing weather codes and descriptions.
         """
@@ -29,7 +44,7 @@ class WeatherData:
     def determine_weather(self):
         """
         Analyze weather data and return a summary.
-
+        Function extracts and construct messages from collected weather data before sending away.
         Returns:
             str: A formatted weather forecast report.
         """
@@ -63,5 +78,5 @@ class WeatherData:
             else:
                 self.icon = '😷'
 
-            final_report += f"{hour} : {self.icon}{weather_description[1]}\n"
+            final_report += f"{hour} : {self.icon}{weather_description[1]}\n"  # Final report is ready
         return final_report

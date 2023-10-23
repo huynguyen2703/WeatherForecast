@@ -1,12 +1,18 @@
 import requests
-from constants import SHEETY_ENDPOINT, HEADER
+from constants import SHEETY_ENDPOINT, HEADER   # special API to automate data posting
 
 
 class GoogleSheet:
+    """
+        A class for interacting with a Google Sheet to retrieve user contact data.
+
+        Attributes:
+            sheety_endpoint (str): The API endpoint for the Google Sheet.
+            header (dict): Headers for authorization.
+        """
     def __init__(self):
         """
-        initialize sheety endpoint url
-                   sheety headers
+        initialize sheety endpoint url, sheety headers
         """
         self.sheety_endpoint = SHEETY_ENDPOINT
         self.header = {'Authorization': HEADER}

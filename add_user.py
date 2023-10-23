@@ -1,3 +1,9 @@
+# The "add_user.py" script is designed to streamline the process of collecting and posting user data to a Google Sheet.
+# It provides a user-friendly command-line interface for inputting user information and offers the flexibility to
+# update or add new entries to the target Google Sheet using the Sheety API.
+# It also handles multiple HTTP errors if something goes wrong, this program is designed and implemented
+# for role Data analyst especially.
+
 import requests
 from constants import SHEETY_ENDPOINT, HEADER
 
